@@ -56,9 +56,9 @@ For directory,  40000 + 40000/(1000/10) = 40400 (directory page).
 
 **Q20**: 1 (hash bucket) + 1 (tuple) = 2
 
-**Q21**:  40000 as we need to scan through all pages
+**Q21**:  40000 as we need to scan through all pages. Including the header 40000 is also acceptable.
 
-**Q22**:  40000 as we need to scan through all pages (note the index is on ssn not salary)
+**Q22**:  40000 as we need to scan through all pages (note the index is on ssn not salary). Including the tree height 40003 is also acceptable.
 
 **Q23**:  this query can use index-only. We just need to scan through all buckets = number of tuples/(page size/directory entry size) = 400000/(1000/10) = 4000
 
