@@ -90,8 +90,8 @@ However, Q4B covers basically the whole zipcode range, which suggests the output
 Same thing could be told from with cost statistics yield by `EXPLAIN` query.
 
 **Q5**:
-Q5A accesses `iowa_store_tree` index. Q5B use `iowa_store_item_vendor_dt_tree`. They are not the same, but still tree index.
-We can see Q5A has around 0.5 selectivity, and Q5B has better selectivity, thus disk IO can be saved greatly compared with sequential scan. Btree allows Bitmap Index Scan, which will save a lot unnecessary random IOs.
+Q5A uses Bitmap Index Scan on iowa_store_tree and Bitmap Heap Scan on iowa. 
+We can see Q5A has selectivity = 145523 /1000000 = 14.6%, and Q5B Q5B has selectivity = 9267 / 1000000 = 0.009%, thus disk IO can be saved greatly compared with sequential scan. Btree allows Bitmap Index Scan, which will save a lot unnecessary random IOs.
 
 Bitmap Scans are very different from plain Index Scans. An Index Scan simply scans through an index and fetches tuples that satisfy a condition one by one. Thus each tuple would incur a separate access to a data page. On the other hand, a Bitmap Scan collects all pointers to tuples matching a condition, sorts them by the data pages they are stored in, and then fetches those tuples in one go. This improves the locality of page accesses. 
 
